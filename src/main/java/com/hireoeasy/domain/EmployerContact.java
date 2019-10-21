@@ -1,10 +1,13 @@
 package com.hireoeasy.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,7 +19,7 @@ public class EmployerContact {
 	@Column(name = "id", nullable = false, updatable = false)
 	private int id;
 
-	@OneToOne(mappedBy = "employercontact")
+	@OneToOne(mappedBy = "employercontact", fetch = FetchType.EAGER)
 	private Employer employer;
 
 	private String phone;
