@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.hireoeasy")
 @EnableAutoConfiguration
-@EnableJpaRepositories("com.spring.app.repository")
+@EnableJpaRepositories(basePackages = {"com.hireoeasy.domain", "com.hireoeasy.repository"})
 public class HireOEasyApplication {
 
 	public static void main(String[] args) {
