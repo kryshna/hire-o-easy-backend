@@ -21,7 +21,7 @@ public class Employer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, updatable = false)
-	private int id;
+	private Long id;
 	private String companyName;
 	private String location;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -38,11 +38,11 @@ public class Employer {
 	public Employer() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

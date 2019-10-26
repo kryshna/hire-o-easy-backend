@@ -15,7 +15,7 @@ public class Admin {
 	private Long id;
 	private String fullName;
 	private String email;
-	private String passeord;
+	private String password;
 
 	public Admin() {
 	}
@@ -44,12 +44,12 @@ public class Admin {
 		this.email = email;
 	}
 
-	public String getPasseord() {
-		return passeord;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasseord(String passeord) {
-		this.passeord = passeord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

@@ -17,7 +17,7 @@ public class EmployerContact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, updatable = false)
-	private int id;
+	private Long id;
 
 	@OneToOne(mappedBy = "employerContact", fetch = FetchType.EAGER)
 	private Employer employer;
@@ -32,11 +32,11 @@ public class EmployerContact {
 	public EmployerContact() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

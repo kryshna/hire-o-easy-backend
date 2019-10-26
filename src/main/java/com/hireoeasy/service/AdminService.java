@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hireoeasy.domain.Admin;
 import com.hireoeasy.repository.AdminRepository;
+import com.hireoeasy.utilities.PasswordUtil;
 
 @Service
 public class AdminService {
@@ -15,8 +16,12 @@ public class AdminService {
 	@Autowired
 	private AdminRepository repo;
 
-	public void save(Admin admin) {
+	private PasswordUtil passwordUtil;
 
+	public void save(Admin admin) {
+		passwordUtil = new PasswordUtil();
+		System.out.println(passwordUtil.getSecurePassword(admin.getPassword()));
+		admin.setPassword(passwordUtil.getSecurePassword(admin.getPassword()));
 		repo.save(admin);
 	}
 
