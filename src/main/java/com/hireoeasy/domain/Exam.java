@@ -21,5 +21,6 @@ public class Exam {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "job_id")
 	private Job job;
+	private String question;
 
 }
