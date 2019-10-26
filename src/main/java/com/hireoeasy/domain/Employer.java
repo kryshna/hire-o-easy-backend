@@ -26,7 +26,7 @@ public class Employer {
 	private String location;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "address_id", referencedColumnName = "id")
-	private EmployerContact contact;
+	private EmployerContact employerContact;
 	private String email;
 	private String password;
 	private String componyLogo;
@@ -71,11 +71,11 @@ public class Employer {
 	}
 
 	public EmployerContact getContact() {
-		return contact;
+		return employerContact;
 	}
 
 	public void setContact(EmployerContact contact) {
-		this.contact = contact;
+		this.employerContact = contact;
 	}
 
 	public String getEmail() {

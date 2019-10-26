@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "EmployerContact")
 @Table(name = "employercontact")
 public class EmployerContact {
 	@Id
@@ -19,7 +19,7 @@ public class EmployerContact {
 	@Column(name = "id", nullable = false, updatable = false)
 	private int id;
 
-	@OneToOne(mappedBy = "employercontact", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "employerContact", fetch = FetchType.EAGER)
 	private Employer employer;
 
 	private String phone;

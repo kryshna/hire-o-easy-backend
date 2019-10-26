@@ -34,14 +34,14 @@ public class AdminController {
 	@PostMapping(value = "/webapi/adminhome/addadmin")
 	public ResponseEntity<?> addAdmin(@RequestBody Admin admin) {
 		adminservice.save(admin);
-		return ResponseEntity.ok().body("New Admin added.");
+		return ResponseEntity.ok().body("Admin added Success.");
 	}
 
 	// Delete admin
 	@DeleteMapping(value = "/webapi/adminhome/admin/delete/{id}")
 	public ResponseEntity<?> deleteAdmin(@PathVariable("id") Long id) {
 		adminservice.delete(id);
-		return ResponseEntity.ok().body("Admin Deleted successfully");
+		return ResponseEntity.ok().body("Admin Deleted");
 	}
 
 	// Get a single admin for edit
