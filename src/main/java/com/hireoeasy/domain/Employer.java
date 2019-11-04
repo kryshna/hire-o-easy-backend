@@ -32,6 +32,7 @@ public class Employer {
 	private String componyLogo;
 	private String industryType;
 	private String status;
+	@Column(nullable = true)
 	@OneToMany(mappedBy = "employer", cascade = CascadeType.ALL)
 	private List<Job> job;
 
