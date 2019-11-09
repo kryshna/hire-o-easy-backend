@@ -2,6 +2,7 @@ package com.hireoeasy.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,16 @@ public class JobService {
 		return jobRepository.findAll();
 	}
 	
+	public void delete(Long id) {
+		jobRepository.deleteById(id);
+	}
+	
+	public Optional<Job> findByid(Long id) {
+		return jobRepository.findById(id);
+	}
 
+//	Method to get list of jobs by category. It takes string parameter job category
+	public List<Job> getJobsbyCategory(String category) {
+		return jobRepository.getJobsByCategory(category);
+	}
 }
