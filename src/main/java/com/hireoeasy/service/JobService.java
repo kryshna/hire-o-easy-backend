@@ -40,4 +40,14 @@ public class JobService {
 	public List<Job> getJobsbyCategory(String category) {
 		return jobRepository.getJobsByCategory(category);
 	}
+	
+//	method to get list of employer by the employer id
+//	public List<Job> getJobsByEmployer(Long id) {
+//		return jobRepository.getJobsByEmployer(id);
+//	}
+	
+//	method to search job by title
+	public List<Job> searchJobByTitle(String search_term) {
+		return jobRepository.searchjobByTitle(search_term);
+	}
 }

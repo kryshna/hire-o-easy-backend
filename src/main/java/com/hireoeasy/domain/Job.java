@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "Job")
 @Table(name = "job")
 public class Job {
@@ -25,6 +27,7 @@ public class Job {
 	private Long id;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "employer_id")
+	@JsonIgnore
 	private Employer employer;
 	private String jobTitle;
 	private String category;

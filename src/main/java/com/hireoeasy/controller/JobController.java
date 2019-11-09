@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hireoeasy.domain.Employer;
 import com.hireoeasy.domain.Job;
+import com.hireoeasy.service.EmployerService;
 import com.hireoeasy.service.JobService;
 
 @RestController
@@ -23,6 +24,9 @@ public class JobController {
 
 	@Autowired
 	private JobService jobService;
+	
+	@Autowired
+	private EmployerService employerService;
 
 	// Get all Jobs List
 	@GetMapping(value = "/webapi/jobs/all")
@@ -31,9 +35,17 @@ public class JobController {
 		return ResponseEntity.ok().body(joblist);
 	}
 
-	// save new job by employee
-	@PostMapping(value = "/webapi/jobs/save")
-	public ResponseEntity<?> postJob(@RequestBody Job job) {
+	// save new job by employee. It takes parameter id which is id of employer
+	@PostMapping(value = "/webapi/jobs/{id}/save")
+	public ResponseEntity<?> postJob(@RequestBody Job job,@PathVariable("id") Long id) {
+		Optional<Employer> emp = employerService.findById(id);
+		Employer employerData;
+		if(emp.isPresent()) {
+			employerData = emp.get();
+		} else {
+			employerData = null;
+		}
+		job.setEmployer(employerData);
 		jobService.save(job);
 		return ResponseEntity.ok().body("Job post Success.");
 	}
@@ -57,11 +69,24 @@ public class JobController {
 	}
 	
 	// Get all Jobs List By Category
-		@GetMapping(value = "/webapi/jobs/category/{category}")
-		public ResponseEntity<List<Job>> getJobsByCategory(@PathVariable("category") String category ) {
-			List<Job> joblist = jobService.getJobsbyCategory(category);
-			return ResponseEntity.ok().body(joblist);
-		}
+	@GetMapping(value = "/webapi/jobs/category/{category}")
+	public ResponseEntity<List<Job>> getJobsByCategory(@PathVariable("category") String category) {
+		List<Job> joblist = jobService.getJobsbyCategory(category);
+		return ResponseEntity.ok().body(joblist);
+	}
 	
+	// Get all Jobs List By Employer
+//	@GetMapping(value = "/webapi/jobs/employer/{employer_id}")
+//	public ResponseEntity<List<Job>> getJobsByEmployer(@PathVariable("employer_id") Long id) {
+//		List<Job> joblist = jobService.getJobsByEmployer(id);
+//		return ResponseEntity.ok().body(joblist);
+//	}
+
+	// Search Job by title
+	@GetMapping(value = "/webapi/jobs/search/{search_term}")
+	public ResponseEntity<List<Job>> searchJobByTitle(@PathVariable("search_term") String search_term) {
+		List<Job> joblist = jobService.searchJobByTitle(search_term);
+		return ResponseEntity.ok().body(joblist);
+	}
 	
 }
