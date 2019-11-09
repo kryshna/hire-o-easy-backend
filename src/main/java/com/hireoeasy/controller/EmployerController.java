@@ -54,5 +54,26 @@ public class EmployerController {
 		}
 		return ResponseEntity.ok().body(null);
 	}
+	
+//	To get list of employee by industry type
+	@GetMapping(value = "/webapi/employerhome/employer/type/{industry_type}")
+	public ResponseEntity<List<Employer>> getEmployerByType(@PathVariable("industry_type") String industry_type) {
+		List<Employer> empListByType = employerService.getEmployerByType(industry_type);
+		return ResponseEntity.ok().body(empListByType);
+	}
+	
+//	To get number of all employers count
+	@GetMapping(value = "/webapi/employerhome/employer/count")
+	public ResponseEntity<Integer> getAllEmployerCount() {
+		int empl_count = employerService.getAllEmployeeCountNumber();
+		return ResponseEntity.ok().body(empl_count);
+	}
+	
+//	To get number of employers count by type
+	@GetMapping(value = "/webapi/employerhome/employer/count/type/{industry_type}")
+	public ResponseEntity<Integer> getEmployerCountByType(@PathVariable("industry_type") String industry_type) {
+		int empl_count = employerService.getAllEmployeeCountByType(industry_type);
+		return ResponseEntity.ok().body(empl_count);
+	}
 
 }

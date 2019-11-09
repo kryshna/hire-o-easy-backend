@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hireoeasy.domain.Admin;
+import com.hireoeasy.domain.Employee;
+import com.hireoeasy.domain.Employer;
 import com.hireoeasy.service.AdminService;
 
 @RestController
@@ -54,5 +56,6 @@ public class AdminController {
 		}
 		return ResponseEntity.ok().body(null);
 	}
+	
 
 }

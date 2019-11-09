@@ -19,7 +19,7 @@ public class EmployerContact {
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
 
-	@OneToOne(mappedBy = "employerContact", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "employerContact", fetch = FetchType.LAZY)
 	private Employer employer;
 
 	private String phone;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hireoeasy.domain.Admin;
+import com.hireoeasy.domain.Employer;
 import com.hireoeasy.repository.AdminRepository;
 import com.hireoeasy.utilities.PasswordUtil;
 

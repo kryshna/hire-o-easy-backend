@@ -46,5 +46,21 @@ public class EmployerService {
 	public Optional<Employer> findById(Long id) {
 		return employerRepository.findById(id);
 	}
+	
+	
+//	method to get list of employer by industry type.This takes argument induustry type in string
+	public List<Employer> getEmployerByType(String industry_type) {
+		return employerRepository.findEmployeebyType(industry_type);
+	}
+	
+//	method to get  number (count of all employer)
+	public int getAllEmployeeCountNumber() {
+		return employerRepository.getAllEmployerCountNumber();
+	}
+	
+//	method to get  number (count of all employer) by industry type.it takes industry type as parameter
+	public int getAllEmployeeCountByType(String industry_type) {
+		return employerRepository.getEmployerCountByType(industry_type);
+	}
 
 }
