@@ -57,5 +57,11 @@ public class AdminController {
 		return ResponseEntity.ok().body(null);
 	}
 	
+//	Admin login
+	@PostMapping(value="/webapi/adminhome/admin/login")
+	public ResponseEntity<Admin> adminLogin(@RequestBody Admin admin) {
+		Admin loggedInAdmin = adminservice.adminLogin(admin);
+		return ResponseEntity.ok().body(loggedInAdmin);
+	}
 
 }

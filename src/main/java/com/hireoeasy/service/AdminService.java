@@ -37,5 +37,13 @@ public class AdminService {
 	public Optional<Admin> findById(Long id) {
 		return repo.findById(id);
 	}
+	
+//	method to login. This first encrypts user inputed value,then compares with the value in database.and if success returns admin
+	public Admin adminLogin(Admin admin) {
+		passwordUtil = new PasswordUtil();
+		String email = admin.getEmail();
+		String password = passwordUtil.getSecurePassword(admin.getPassword());
+		return repo.adminLogin(email, password);
+	}
 
 }
