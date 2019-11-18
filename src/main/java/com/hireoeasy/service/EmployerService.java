@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hireoeasy.domain.Admin;
 import com.hireoeasy.domain.Employer;
 import com.hireoeasy.domain.EmployerContact;
 import com.hireoeasy.repository.EmployerRepository;
@@ -46,18 +47,25 @@ public class EmployerService {
 	public Optional<Employer> findById(Long id) {
 		return employerRepository.findById(id);
 	}
-	
-	
+
+//	method to login. This first encrypts user inputed value,then compares with the value in database.and if success returns admin
+	public Employer employerLogin(Employer employer) {
+		passwordUtil = new PasswordUtil();
+		String email = employer.getEmail();
+		String password = passwordUtil.getSecurePassword(employer.getPassword());
+		return employerRepository.employerLogin(email, password);
+	}
+
 //	method to get list of employer by industry type.This takes argument induustry type in string
 	public List<Employer> getEmployerByType(String industry_type) {
 		return employerRepository.findEmployeebyType(industry_type);
 	}
-	
+
 //	method to get  number (count of all employer)
 	public int getAllEmployeeCountNumber() {
 		return employerRepository.getAllEmployerCountNumber();
 	}
-	
+
 //	method to get  number (count of all employer) by industry type.it takes industry type as parameter
 	public int getAllEmployeeCountByType(String industry_type) {
 		return employerRepository.getEmployerCountByType(industry_type);

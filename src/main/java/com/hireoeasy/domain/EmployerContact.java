@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "EmployerContact")
 @Table(name = "employercontact")
 public class EmployerContact {
@@ -20,6 +22,7 @@ public class EmployerContact {
 	private Long id;
 
 	@OneToOne(mappedBy = "employerContact", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Employer employer;
 
 	private String phone;

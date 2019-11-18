@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hireoeasy.domain.Admin;
 import com.hireoeasy.domain.Employer;
 import com.hireoeasy.service.EmployerService;
 
@@ -74,6 +75,13 @@ public class EmployerController {
 	public ResponseEntity<Integer> getEmployerCountByType(@PathVariable("industry_type") String industry_type) {
 		int empl_count = employerService.getAllEmployeeCountByType(industry_type);
 		return ResponseEntity.ok().body(empl_count);
+	}
+	
+//	Employer login
+	@PostMapping(value="/webapi/employerhome/employer/login")
+	public ResponseEntity<Employer> employerLogin(@RequestBody Employer employer) {
+		Employer loggedInEmployer = employerService.employerLogin(employer);
+		return ResponseEntity.ok().body(loggedInEmployer);
 	}
 
 }
