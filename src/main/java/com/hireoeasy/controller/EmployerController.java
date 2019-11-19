@@ -1,7 +1,7 @@
 package com.hireoeasy.controller;
 
 import java.util.List;
-import java.util.Optional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,14 +46,34 @@ public class EmployerController {
 	}
 
 	// Get a single employer for edit
-	@GetMapping(value = "/webapi/employerhome/employer/edit/{id}")
-	public ResponseEntity<Employer> getEmployer(@PathVariable("id") Long id) {
-		Optional<Employer> employer = employerService.findById(id);
-		if (employer.isPresent()) {
-			Employer employerDto = employer.get();
-			return ResponseEntity.ok().body(employerDto);
-		}
-		return ResponseEntity.ok().body(null);
+//	@GetMapping(value = "/webapi/employerhome/employer/edit/{id}")
+//	public ResponseEntity<Employer> getEmployer(@PathVariable("id") Long id) {
+//		Optional<Employer> employer = employerService.findById(id);
+//		if (employer.isPresent()) {
+//			Employer employerDto = employer.get();
+//			return ResponseEntity.ok().body(employerDto);
+//		}
+//		return ResponseEntity.ok().body(null);
+//	}
+	
+	@PutMapping("/webapi/employerhome/employer/edit/{id}")
+	public ResponseEntity<Employer> updateEmployer(@PathVariable(value = "id") Long id,
+			@Valid @RequestBody Employer employerDetails) throws Exception {
+		Employer employer = employerService.findById(id)
+				.orElseThrow(() -> new Exception("Employer not found for this id :: " + id));
+
+		employer.setCompanyName(employerDetails.getCompanyName());
+		employer.setStatus(employerDetails.getStatus());
+		employer.setContact(employerDetails.getContact());
+		employer.setEmail(employerDetails.getEmail());
+		employer.setLocation(employerDetails.getLocation());
+		employer.setPassword(employerDetails.getPassword());
+		employer.setComponyLogo(employerDetails.getComponyLogo());
+		employer.setIndustryType(employerDetails.getIndustryType());
+		employer.setJob(employerDetails.getJob());
+
+		final Employer updatedEmployer = employerService.save(employer);
+		return ResponseEntity.ok(updatedEmployer);
 	}
 	
 //	To get list of employee by industry type

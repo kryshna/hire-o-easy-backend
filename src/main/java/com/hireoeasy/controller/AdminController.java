@@ -62,7 +62,7 @@ public class AdminController {
 	public ResponseEntity<Admin> updateEmployee(@PathVariable(value = "id") Long id,
 			@Valid @RequestBody Admin adminDetails) throws Exception {
 		Admin admin = adminservice.findById(id)
-				.orElseThrow(() -> new Exception("Employee not found for this id :: " + id));
+				.orElseThrow(() -> new Exception("Admin not found for this id :: " + id));
 
 		admin.setFullName(adminDetails.getFullName());
 		admin.setEmail(adminDetails.getEmail());

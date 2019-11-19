@@ -22,18 +22,18 @@ public class EmployerService {
 
 	private PasswordUtil passwordUtil;
 
-	public void save(Employer employer) {
-		System.out.println("EmployerService.save()");
-		System.out.println("Employer :: " + employer);
-		passwordUtil = new PasswordUtil();
-//		EmployerContact employerContact = employer.getContact();
-//
-//		System.out.println("employerContact :: " + employerContact + "phone : " + employerContact.getPhone());
-//		contactService.save(employerContact);
-		System.out.println(passwordUtil.getSecurePassword(employer.getPassword()));
-		employer.setPassword(passwordUtil.getSecurePassword(employer.getPassword()));
-		employerRepository.save(employer);
-	}
+//	public void save(Employer employer) {
+//		System.out.println("EmployerService.save()");
+//		System.out.println("Employer :: " + employer);
+//		passwordUtil = new PasswordUtil();
+////		EmployerContact employerContact = employer.getContact();
+////
+////		System.out.println("employerContact :: " + employerContact + "phone : " + employerContact.getPhone());
+////		contactService.save(employerContact);
+//		System.out.println(passwordUtil.getSecurePassword(employer.getPassword()));
+//		employer.setPassword(passwordUtil.getSecurePassword(employer.getPassword()));
+//		employerRepository.save(employer);
+//	}
 
 	public List<Employer> listAll() {
 		return employerRepository.findAll();
@@ -61,6 +61,18 @@ public class EmployerService {
 //	method to get  number (count of all employer) by industry type.it takes industry type as parameter
 	public int getAllEmployeeCountByType(String industry_type) {
 		return employerRepository.getEmployerCountByType(industry_type);
+	}
+
+	public Employer save(Employer employer) {
+		// TODO Auto-generated method stub
+		System.out.println("EmployerService.save()");
+		System.out.println("Employer :: " + employer);
+		passwordUtil = new PasswordUtil();
+		
+		System.out.println(passwordUtil.getSecurePassword(employer.getPassword()));
+		employer.setPassword(passwordUtil.getSecurePassword(employer.getPassword()));
+		
+		return employerRepository.save(employer);
 	}
 
 }
