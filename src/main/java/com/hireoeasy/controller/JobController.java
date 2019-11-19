@@ -24,7 +24,7 @@ public class JobController {
 
 	@Autowired
 	private JobService jobService;
-	
+
 	@Autowired
 	private EmployerService employerService;
 
@@ -37,10 +37,10 @@ public class JobController {
 
 	// save new job by employee. It takes parameter id which is id of employer
 	@PostMapping(value = "/webapi/jobs/{id}/save")
-	public ResponseEntity<?> postJob(@RequestBody Job job,@PathVariable("id") Long id) {
+	public ResponseEntity<?> postJob(@RequestBody Job job, @PathVariable("id") Long id) {
 		Optional<Employer> emp = employerService.findById(id);
 		Employer employerData;
-		if(emp.isPresent()) {
+		if (emp.isPresent()) {
 			employerData = emp.get();
 		} else {
 			employerData = null;
@@ -67,14 +67,14 @@ public class JobController {
 		}
 		return ResponseEntity.ok().body(null);
 	}
-	
+
 	// Get all Jobs List By Category
 	@GetMapping(value = "/webapi/jobs/category/{category}")
 	public ResponseEntity<List<Job>> getJobsByCategory(@PathVariable("category") String category) {
 		List<Job> joblist = jobService.getJobsbyCategory(category);
 		return ResponseEntity.ok().body(joblist);
 	}
-	
+
 	// Get all Jobs List By Employer
 //	@GetMapping(value = "/webapi/jobs/employer/{employer_id}")
 //	public ResponseEntity<List<Job>> getJobsByEmployer(@PathVariable("employer_id") Long id) {
@@ -88,5 +88,5 @@ public class JobController {
 		List<Job> joblist = jobService.searchJobByTitle(search_term);
 		return ResponseEntity.ok().body(joblist);
 	}
-	
+
 }

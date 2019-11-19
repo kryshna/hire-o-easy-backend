@@ -19,12 +19,12 @@ public class AdminService {
 
 	private PasswordUtil passwordUtil;
 
-	public void save(Admin admin) {
-		passwordUtil = new PasswordUtil();
-		System.out.println(passwordUtil.getSecurePassword(admin.getPassword()));
-		admin.setPassword(passwordUtil.getSecurePassword(admin.getPassword()));
-		repo.save(admin);
-	}
+//	public void save(Admin admin) {
+//		passwordUtil = new PasswordUtil();
+//		System.out.println(passwordUtil.getSecurePassword(admin.getPassword()));
+//		admin.setPassword(passwordUtil.getSecurePassword(admin.getPassword()));
+//		repo.save(admin);
+//	}
 
 	public List<Admin> listAll() {
 		return repo.findAll();
@@ -38,4 +38,13 @@ public class AdminService {
 		return repo.findById(id);
 	}
 
+	public Admin save(Admin admin) {
+		// TODO Auto-generated method stub
+		passwordUtil = new PasswordUtil();
+		System.out.println(passwordUtil.getSecurePassword(admin.getPassword()));
+		admin.setPassword(passwordUtil.getSecurePassword(admin.getPassword()));
+		return repo.save(admin);
+	}
+	
+	
 }
