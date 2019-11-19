@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hireoeasy.domain.Employer;
 import com.hireoeasy.domain.Job;
 import com.hireoeasy.repository.JobRepository;
 
@@ -42,8 +43,8 @@ public class JobService {
 	}
 	
 //	method to get list of employer by the employer id
-//	public List<Job> getJobsByEmployer(Long id) {
-//		return jobRepository.getJobsByEmployer(id);
+//	public List<Job> getJobsByEmployer(Employer emp) {
+//		return jobRepository.getJobsByEmployer(emp);
 //	}
 	
 //	method to search job by title

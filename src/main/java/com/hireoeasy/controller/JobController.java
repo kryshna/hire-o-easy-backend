@@ -76,11 +76,21 @@ public class JobController {
 	}
 	
 	// Get all Jobs List By Employer
-//	@GetMapping(value = "/webapi/jobs/employer/{employer_id}")
-//	public ResponseEntity<List<Job>> getJobsByEmployer(@PathVariable("employer_id") Long id) {
-//		List<Job> joblist = jobService.getJobsByEmployer(id);
+	@GetMapping(value = "/webapi/jobs/employer/{employer_id}")
+	public ResponseEntity<List<Job>> getJobsByEmployer(@PathVariable("employer_id") Long id) {
+		Optional<Employer> emp = employerService.findById(id);
+		Employer employerData;
+		if(emp.isPresent()) {
+			employerData = emp.get();
+			List<Job> joblist = employerData.getJob();
+			return ResponseEntity.ok().body(joblist);
+		} else {
+			employerData = null;
+			return null;
+		}
+//		List<Job> joblist = employerData.getJob();
 //		return ResponseEntity.ok().body(joblist);
-//	}
+	}
 
 	// Search Job by title
 	@GetMapping(value = "/webapi/jobs/search/{search_term}")

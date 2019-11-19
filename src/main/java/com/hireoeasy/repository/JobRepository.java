@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.hireoeasy.domain.Employer;
 import com.hireoeasy.domain.Job;
 
 @Repository
@@ -17,8 +18,8 @@ public interface JobRepository extends JpaRepository<Job, Long> {
 	List<Job> getJobsByCategory(@Param("category") String category);
 	
 //	TO select list of jobs by employer who posted the job
-//	@Query("SELECT j FROM Job WHERE j.employer = :employer_id ")
-//	List<Job> getJobsByEmployer(@Param("employer_id") Long id );
+//	@Query("SELECT j FROM Job WHERE j.employer = :employer ")
+//	List<Job> getJobsByEmployer(@Param("employer") Employer employer );
 	
 //	TO search job by title
 	@Query("SELECT j FROM Job j WHERE jobTitle LIKE %:search_term% ")
