@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hireoeasy.domain.Admin;
 import com.hireoeasy.domain.Employer;
 import com.hireoeasy.domain.EmployerContact;
+import com.hireoeasy.domain.EmployerDataInput;
 import com.hireoeasy.repository.EmployerRepository;
 import com.hireoeasy.utilities.PasswordUtil;
 
@@ -35,6 +36,7 @@ public class EmployerService {
 		employer.setPassword(passwordUtil.getSecurePassword(employer.getPassword()));
 		employerRepository.save(employer);
 	}
+	
 
 	public List<Employer> listAll() {
 		return employerRepository.findAll();
@@ -69,6 +71,28 @@ public class EmployerService {
 //	method to get  number (count of all employer) by industry type.it takes industry type as parameter
 	public int getAllEmployeeCountByType(String industry_type) {
 		return employerRepository.getEmployerCountByType(industry_type);
+	}
+	
+//	setEmployer Data
+	public Employer setEmployerDate(EmployerDataInput employerData) {
+		Employer employer = new Employer();
+		employer.setCompanyName(employerData.getCompanyName());
+		employer.setComponyLogo(employerData.getComponyLogo());
+		employer.setEmail(employerData.getEmail());
+		employer.setIndustryType(employerData.getIndustryType());
+		employer.setLocation(employerData.getLocation());
+		employer.setPassword(employerData.getPassword());
+		employer.setStatus(employerData.getStatus());
+		EmployerContact ec = new EmployerContact();
+		ec.setEmployer(employer);
+		ec.setFacebook(employerData.getFacebook());
+		ec.setLinkedIn(employerData.getLinkedIn());
+		ec.setMobile(employerData.getMobile());
+		ec.setPhone(employerData.getPhone());
+		ec.setPostBoxNumber(employerData.getPostBoxNumber());
+		ec.setWebsite(employerData.getWebsite());
+		employer.setContact(ec);
+		return employer;
 	}
 
 }

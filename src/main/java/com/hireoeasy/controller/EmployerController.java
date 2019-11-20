@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hireoeasy.domain.Admin;
 import com.hireoeasy.domain.Employer;
+import com.hireoeasy.domain.EmployerDataInput;
 import com.hireoeasy.service.EmployerService;
 
 @RestController
@@ -33,7 +34,8 @@ public class EmployerController {
 
 	// save new Employer
 	@PostMapping(value = "/webapi/employer/signup")
-	public ResponseEntity<?> addEmployer(@RequestBody Employer employer) {
+	public ResponseEntity<?> addEmployer(@RequestBody EmployerDataInput employerData) {
+		Employer employer = employerService.setEmployerDate(employerData);
 		employerService.save(employer);
 		return ResponseEntity.ok().body("Employer added Success.");
 	}
