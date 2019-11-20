@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hireoeasy.domain.Admin;
 import com.hireoeasy.domain.Employer;
+import com.hireoeasy.domain.EmployerContact;
 import com.hireoeasy.domain.EmployerDataInput;
 import com.hireoeasy.service.EmployerService;
 
@@ -84,6 +85,21 @@ public class EmployerController {
 	public ResponseEntity<Employer> employerLogin(@RequestBody Employer employer) {
 		Employer loggedInEmployer = employerService.employerLogin(employer);
 		return ResponseEntity.ok().body(loggedInEmployer);
+	}
+	
+//	Get employer contact detail
+	@GetMapping(value = "/webapi/employerhome/employer/contact/{id}")
+	public ResponseEntity<EmployerContact> getEmployerContact(@PathVariable("id") Long id) {
+		Optional<Employer> emp = employerService.findById(id);
+		Employer employerData;
+		if(emp.isPresent()) {
+			employerData = emp.get();
+			EmployerContact contact = employerData.getContact();
+			return ResponseEntity.ok().body(contact);
+		} else {
+			employerData = null;
+			return null;
+		}
 	}
 
 }
