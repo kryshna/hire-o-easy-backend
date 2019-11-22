@@ -66,6 +66,13 @@ public class EmployerController {
 		return ResponseEntity.ok().body(empListByType);
 	}
 	
+//	To get list of employee by status
+	@GetMapping(value = "/webapi/employerhome/employer/status/{status}")
+	public ResponseEntity<List<Employer>> getEmployerByStatus(@PathVariable("status") String status) {
+		List<Employer> empListByStatus = employerService.getEmployerByStatus(status);
+		return ResponseEntity.ok().body(empListByStatus);
+	}
+	
 //	To get number of all employers count
 	@GetMapping(value = "/webapi/employerhome/employer/count")
 	public ResponseEntity<Integer> getAllEmployerCount() {
@@ -100,6 +107,13 @@ public class EmployerController {
 			employerData = null;
 			return null;
 		}
+	}
+	
+//	method to change status of employer either pending or rejected or approved
+	@GetMapping(value="/webapi/employerhome/employer/{id}/changestatus/{newStatus}")
+	public ResponseEntity<?> changeEmployerStatus(@PathVariable("id") Long id,@PathVariable("newStatus") String newStatus) {
+		employerService.changeStatus(id, newStatus);
+		return ResponseEntity.ok().body("Status changed");
 	}
 
 }

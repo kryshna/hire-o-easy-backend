@@ -31,7 +31,7 @@ public class EmployeeController {
 	}
 
 	// save new employee
-	@PostMapping(value = "/webapi/employee/signp")
+	@PostMapping(value = "/webapi/employee/signup")
 	public ResponseEntity<?> addEmployee(@RequestBody Employee employee) {
 		employeeservice.save(employee);
 		return ResponseEntity.ok().body("Employee added Success.");

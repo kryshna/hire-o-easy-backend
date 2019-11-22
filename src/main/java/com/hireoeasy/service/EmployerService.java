@@ -94,5 +94,15 @@ public class EmployerService {
 		employer.setContact(ec);
 		return employer;
 	}
+	
+//	change employer status
+	public void changeStatus(Long id,String newStatus) {
+		employerRepository.changeEmployerStatus(id, newStatus);
+	}
+	
+//	get list of employer by status
+	public List<Employer> getEmployerByStatus(String status) {
+		return employerRepository.findEmployeebyStatus(status);
+	}
 
 }
