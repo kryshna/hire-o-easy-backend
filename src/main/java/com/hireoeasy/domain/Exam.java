@@ -22,6 +22,7 @@ public class Exam {
 	@JoinColumn(name = "job_id")
 	private Job job;
 	private String question;
+	
 
 	// task remaining to map answer
 	public Long getId() {
