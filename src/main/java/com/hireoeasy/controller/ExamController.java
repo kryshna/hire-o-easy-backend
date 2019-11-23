@@ -53,4 +53,18 @@ public class ExamController {
 		return ResponseEntity.ok().body("Exam post Success.");
 	}
 
+	// Get all Exam List By Job
+	@GetMapping(value = "/webapi/jobs/exam/{job_id}")
+	public ResponseEntity<List<Exam>> getJobsByEmployer(@PathVariable("job_id") Long id) {
+		Optional<Job> job = jobService.findByid(id);
+		Job jobData;
+		if (job.isPresent()) {
+			jobData = job.get();
+			List<Exam> examlist = jobData.getExam();
+			return ResponseEntity.ok().body(examlist);
+		} else {
+			jobData = null;
+			return null;
+		}
+	}
 }
