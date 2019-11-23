@@ -67,4 +67,12 @@ public class ExamController {
 			return null;
 		}
 	}
+	
+//	delete exam by Id
+	@DeleteMapping(value="/webapi/jobs/exam/delete/{exam_id}")
+	public ResponseEntity<?> deleteExam(@PathVariable("exam_id") Long id) {
+		examService.delete(id);
+		return ResponseEntity.ok().body("Exam Delete");
+	}
+	
 }
