@@ -14,23 +14,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hireoeasy.domain.Admin;
+import com.hireoeasy.domain.Employer;
 import com.hireoeasy.domain.Exam;
+import com.hireoeasy.domain.Job;
+import com.hireoeasy.service.EmployerService;
 import com.hireoeasy.service.ExamService;
+import com.hireoeasy.service.JobService;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class ExamController {
-	
+
 	@Autowired
 	private ExamService examService;
-	
-	// Get all exam list
-		@GetMapping(value = "/webapi/jobs/exam/all")
-		public ResponseEntity<List<Exam>> getAllExam() {
-			List<Exam> examlist = examService.findAll();
-			return ResponseEntity.ok().body(examlist);
-		}
 
-	
+	@Autowired
+	private JobService jobService;
+
+	// Get all exam list
+	@GetMapping(value = "/webapi/jobs/exam/all")
+	public ResponseEntity<List<Exam>> getAllExam() {
+		List<Exam> examlist = examService.findAll();
+		return ResponseEntity.ok().body(examlist);
+	}
+
+	// post job by job id
+	@PostMapping(value = "/webapi/jobs/exam/{id}/save")
+	public ResponseEntity<?> postJob(@RequestBody Exam exam, @PathVariable("id") Long id) {
+		Optional<Job> job = jobService.findByid(id);
+		Job jobData;
+		if (job.isPresent()) {
+			jobData = job.get();
+		} else {
+			jobData = null;
+		}
+		exam.setJob(jobData);
+		examService.save(exam);
+		return ResponseEntity.ok().body("Exam post Success.");
+	}
 
 }
