@@ -132,6 +132,7 @@ public class EmployeeController {
 			Employee emp1 = employee.get();
 
 			emp1.setJob(jobs);
+			employeeservice.save(emp1);
 		}
 
 		return ResponseEntity.ok().body("job added ");
