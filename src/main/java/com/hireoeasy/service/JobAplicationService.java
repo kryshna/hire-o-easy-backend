@@ -23,10 +23,9 @@ public class JobAplicationService {
 	@Autowired
 	private EmployeeService employeeService;
 
-	private Connection con = new DatabaseConnection().getConnection();
-	private PreparedStatement pstm = null;
-
 	public void applyForJob(Long employerId, Long jobId) throws SQLException {
+		Connection con = new DatabaseConnection().getConnection();
+		PreparedStatement pstm = null;
 
 		String query = "INSERT INTO employee_job (employee_id,job_id) VALUES (?,?)";
 		try {
@@ -50,6 +49,9 @@ public class JobAplicationService {
 	}
 
 	public ArrayList<Job> findJobByEmployee(Long employeeId) throws SQLException {
+		Connection con = new DatabaseConnection().getConnection();
+		PreparedStatement pstm = null;
+
 		String query = "Select job_id from employee_job where employee_id = ?";
 		ArrayList<Job> jobs = new ArrayList<>();
 
