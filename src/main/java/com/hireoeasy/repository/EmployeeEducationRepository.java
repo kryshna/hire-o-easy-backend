@@ -14,6 +14,6 @@ import com.hireoeasy.domain.EmployeeEducation;
 public interface EmployeeEducationRepository extends JpaRepository<EmployeeEducation, Long>{
 	
 	@Query("SELECT e FROM EmployeeEducation e WHERE e.userDetail = :userDetailId ")
-	ArrayList<EmployeeEducation> findEducationById(@Param("userDetailId") Long id);
+	List<EmployeeEducation> findEducationById(@Param("userDetailId") Long id);
 
 }
