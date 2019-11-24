@@ -33,7 +33,7 @@ public class EmployeeController {
 
 	@Autowired
 	private JobService jobService;
-	
+
 	@Autowired
 	private JobAplicationService jobApplicationService;
 
@@ -130,19 +130,19 @@ public class EmployeeController {
 		Optional<Employee> employee = employeeservice.findById(employeeId);
 		Optional<Job> job = jobService.findByid(jobId);
 		ArrayList<Job> jobs = new ArrayList<>();
-//		if (job.isPresent()) {
-//			Job jobDto = job.get();
-//			jobs.add(jobDto);
-//		}
-//
-//		if (employee.isPresent()) {
-//			Employee emp1 = employee.get();
-//
-//			emp1.setJob(jobs);
-//			employeeservice.save(emp1);
-//		}
+		// if (job.isPresent()) {
+		// Job jobDto = job.get();
+		// jobs.add(jobDto);
+		// }
+		//
+		// if (employee.isPresent()) {
+		// Employee emp1 = employee.get();
+		//
+		// emp1.setJob(jobs);
+		// employeeservice.save(emp1);
+		// }
 
-		if (job.isPresent() && employee.isPresent() ) {
+		if (job.isPresent() && employee.isPresent()) {
 			try {
 				jobApplicationService.applyForJob(employeeId, jobId);
 			} catch (SQLException e) {
@@ -151,6 +151,23 @@ public class EmployeeController {
 			}
 		}
 		return ResponseEntity.ok().body("job added ");
+	}
+
+	@GetMapping(value = "/webapi/employee/{employee_id}/jobs")
+	public ResponseEntity<?> findJobByEmployee(@PathVariable("employee_id") Long employeeId) {
+		Optional<Employee> employee = employeeservice.findById(employeeId);
+
+		ArrayList<Job> jobs = new ArrayList<>();
+
+		if (employee.isPresent()) {
+			try {
+				jobs = jobApplicationService.findJobByEmployee(employeeId);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return ResponseEntity.ok().body(jobs);
 	}
 
 }
