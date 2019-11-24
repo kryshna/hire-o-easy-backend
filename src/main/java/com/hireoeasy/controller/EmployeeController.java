@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hireoeasy.domain.Employee;
+import com.hireoeasy.domain.UserDataInput;
 import com.hireoeasy.domain.UserDetail;
 import com.hireoeasy.service.EmployeeService;
 
@@ -33,8 +34,29 @@ public class EmployeeController {
 
 	// save new employee
 	@PostMapping(value = "/webapi/employee/signup")
-	public ResponseEntity<?> addEmployee(@RequestBody Employee employee) {
-		employeeservice.save(employee);
+	public ResponseEntity<?> addEmployee(@RequestBody UserDataInput u) {
+		Employee e = new Employee();
+		e.setFullName(u.getFullName());
+		e.setEmail(u.getEmail());
+		e.setUserName(u.getUserName());
+		e.setPassword(u.getPassword());
+		
+		UserDetail ud = new UserDetail();
+		ud.setActivities(u.getActivities());
+		ud.setAddress(u.getAddress());
+		ud.setDob(u.getDob());
+		ud.setField(u.getField());
+		ud.setGender(u.getGender());
+		ud.setInterPersonalSkills(u.getInterPersonalSkills());
+		ud.setJobObjective(u.getJobObjective());
+		ud.setJobPriority(u.getJobPriority());
+		ud.setMaritalStatus(u.getMaritalStatus());
+		ud.setPhone(u.getPhone());
+		ud.setNationality(u.getNationality());
+		ud.setReligion(u.getReligion());
+		
+		e.setUserDetail(ud);
+		employeeservice.save(e);
 		return ResponseEntity.ok().body("Employee added Success.");
 	}
 
