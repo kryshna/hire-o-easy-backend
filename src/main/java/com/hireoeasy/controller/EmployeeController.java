@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hireoeasy.domain.Employee;
+
 import com.hireoeasy.domain.UserDataInput;
 import com.hireoeasy.domain.UserDetail;
+import com.hireoeasy.domain.Employer;
 import com.hireoeasy.domain.Job;
 import com.hireoeasy.service.EmployeeService;
+import com.hireoeasy.service.EmployerService;
 import com.hireoeasy.service.JobAplicationService;
 import com.hireoeasy.service.JobService;
 
@@ -36,6 +39,8 @@ public class EmployeeController {
 
 	@Autowired
 	private JobAplicationService jobApplicationService;
+	@Autowired
+	private EmployerService employerService;
 
 	// Get all employee list
 	@GetMapping(value = "/webapi/employee/all")
@@ -168,6 +173,25 @@ public class EmployeeController {
 			}
 		}
 		return ResponseEntity.ok().body(jobs);
+	}
+
+	@GetMapping(value = "/webapi/employer/{employer_id}/job/{job_id}/applications")
+	public ResponseEntity<?> findEmployeeByJob(@PathVariable("employer_id") Long employeeId,
+			@PathVariable("jobId") Long jobId) {
+		Optional<Job> job = jobService.findByid(jobId);
+		Optional<Employer> employer = employerService.findById(employeeId);
+
+		ArrayList<Employee> employeeList = new ArrayList<>();
+
+		if (employer.isPresent() && job.isPresent()) {
+			try {
+				employeeList = jobApplicationService.findEmployeeByJob(jobId);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return ResponseEntity.ok().body(employeeList);
 	}
 
 }
