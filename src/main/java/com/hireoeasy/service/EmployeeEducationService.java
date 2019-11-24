@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.hireoeasy.domain.EmployeeEducation;
@@ -12,6 +14,7 @@ import com.hireoeasy.repository.EmployeeEducationRepository;
 @Service
 public class EmployeeEducationService {
 
+	@Autowired
 	private EmployeeEducationRepository educationRepository;
 
 	// to save the education
