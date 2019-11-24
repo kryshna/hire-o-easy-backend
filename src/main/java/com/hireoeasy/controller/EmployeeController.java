@@ -1,5 +1,6 @@
 package com.hireoeasy.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hireoeasy.domain.Employee;
 import com.hireoeasy.domain.UserDataInput;
 import com.hireoeasy.domain.UserDetail;
+import com.hireoeasy.domain.Job;
 import com.hireoeasy.service.EmployeeService;
+import com.hireoeasy.service.JobService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -24,6 +27,8 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeservice;
+
+	private JobService jobService;
 
 	// Get all employee list
 	@GetMapping(value = "/webapi/employee/all")
@@ -78,7 +83,7 @@ public class EmployeeController {
 		return ResponseEntity.ok().body(null);
 	}
 
-//	EMployee login
+	// EMployee login
 	@PostMapping(value = "/webapi/employee/login")
 	public ResponseEntity<Employee> employeeLogin(@RequestBody Employee employee) {
 		Employee loggedInEmployee = employeeservice.employeeLogin(employee);
@@ -110,6 +115,26 @@ public class EmployeeController {
 		} else {
 			return null;
 		}
+	}
+
+	@PostMapping(value = "/webapi/employee/{employee_id}/job/{job_id}/apply")
+	public ResponseEntity<?> applyJob(@PathVariable("employee_id") Long employeeId,
+			@PathVariable("job_id") Long jobId) {
+		Optional<Employee> employee = employeeservice.findById(employeeId);
+		Optional<Job> job = jobService.findByid(jobId);
+		ArrayList<Job> jobs = new ArrayList<>();
+		if (job.isPresent()) {
+			Job jobDto = job.get();
+			jobs.add(jobDto);
+		}
+
+		if (employee.isPresent()) {
+			Employee emp1 = employee.get();
+
+			emp1.setJob(jobs);
+		}
+
+		return ResponseEntity.ok().body("job added ");
 	}
 
 }
