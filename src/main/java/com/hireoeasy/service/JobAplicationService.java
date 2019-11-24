@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hireoeasy.domain.Employee;
 import com.hireoeasy.domain.Job;
 import com.hireoeasy.utilities.DatabaseConnection;
 
@@ -19,6 +20,8 @@ public class JobAplicationService {
 
 	@Autowired
 	private JobService jobService;
+	@Autowired
+	private EmployeeService employeeService;
 
 	private Connection con = new DatabaseConnection().getConnection();
 	private PreparedStatement pstm = null;
@@ -76,6 +79,39 @@ public class JobAplicationService {
 		}
 
 		return jobs;
+
+	}
+
+	public ArrayList<Employee> findEmployeeByJob(Long jobId) throws SQLException {
+		String query = "Select employee_id from employee_job where job_id = ?";
+		ArrayList<Employee> employeeList = new ArrayList<>();
+
+		try {
+			pstm = con.prepareStatement(query);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			pstm.setLong(1, jobId);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				Optional<Employee> employee = employeeService.findById(rs.getLong("employee_id"));
+				if (employee.isPresent()) {
+					Employee employeeDto = employee.get();
+					employeeList.add(employeeDto);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} finally {
+			pstm.close();
+			con.close();
+		}
+
+		return employeeList;
 
 	}
 }
