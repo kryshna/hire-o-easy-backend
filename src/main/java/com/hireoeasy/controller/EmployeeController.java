@@ -177,7 +177,7 @@ public class EmployeeController {
 
 	@GetMapping(value = "/webapi/employer/job/{job_id}/applications")
 	public ResponseEntity<?> findEmployeeByJob(
-			@PathVariable("jobId") Long jobId) {
+			@PathVariable("job_id") Long jobId) {
 		Optional<Job> job = jobService.findByid(jobId);
 		//Optional<Employer> employer = employerService.findById(employeeId);
 
