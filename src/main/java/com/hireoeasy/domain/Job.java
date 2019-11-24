@@ -1,6 +1,7 @@
 package com.hireoeasy.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -43,8 +45,12 @@ public class Job {
 	private List<Exam> exam;
 	private String jobDescription;
 
-	public Job() {
-	}
+//	@ManyToMany(mappedBy = "job")
+//    private ArrayList<Employee> employees = new ArrayList<>();
+//	public Job() {
+//	}
+
+	
 
 	public Long getId() {
 		return id;
