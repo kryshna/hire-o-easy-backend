@@ -25,6 +25,7 @@ public class JobAplicationService {
 		}
 		try {
 			pstm.setLong(1, employerId);
+			pstm.setLong(2, jobId);
 			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
