@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "EmployeeEducation")
 @Table(name = "employee_education")
 public class EmployeeEducation {
@@ -21,6 +23,7 @@ public class EmployeeEducation {
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userdetail_id")
 	private UserDetail userDetail;

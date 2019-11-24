@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "EmployeeExperience")
 @Table(name = "employee_experience")
 public class EmployeeExperience {
@@ -19,6 +21,7 @@ public class EmployeeExperience {
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userdetail_id")
 	private UserDetail userDetail;
