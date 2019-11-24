@@ -85,6 +85,8 @@ public class JobAplicationService {
 	}
 
 	public ArrayList<Employee> findEmployeeByJob(Long jobId) throws SQLException {
+		Connection con = new DatabaseConnection().getConnection();
+		PreparedStatement pstm = null;
 		String query = "Select employee_id from employee_job where job_id = ?";
 		ArrayList<Employee> employeeList = new ArrayList<>();
 
