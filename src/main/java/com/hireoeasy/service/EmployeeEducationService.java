@@ -21,7 +21,7 @@ public class EmployeeEducationService {
 	}
 
 	// To get list of education
-	public ArrayList<EmployeeEducation> findEducationByUserDetailId(Long id) {
+	public List<EmployeeEducation> findEducationByUserDetailId(Long id) {
 		return educationRepository.findEducationById(id);
 	}
 

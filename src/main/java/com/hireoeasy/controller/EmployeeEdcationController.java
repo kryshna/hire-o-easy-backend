@@ -35,7 +35,7 @@ public class EmployeeEdcationController {
 		@GetMapping(value = "/webapi/employee/employeedetail/education/{user_detail_id}")
 		public ResponseEntity<List<EmployeeEducation>> getAllJobs(@PathVariable("user_detail_id") Long id) {
 			Optional<UserDetail> userDetail = userDetailService.findByid(id);
-			ArrayList<EmployeeEducation> educationList = new ArrayList<>();
+			List<EmployeeEducation> educationList = new ArrayList<>();
 			if(userDetail.isPresent()) {
 				educationList = educationService.findEducationByUserDetailId(id);
 			}
