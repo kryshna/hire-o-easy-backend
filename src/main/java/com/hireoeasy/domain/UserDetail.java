@@ -54,6 +54,15 @@ public class UserDetail {
 
 	private String field;
 
+	private String skills;
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
 	public Long getId() {
 		return id;
 	}
