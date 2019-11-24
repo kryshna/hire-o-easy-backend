@@ -9,12 +9,12 @@ import javax.persistence.Id;
 @Entity
 public class Skill {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, updatable = false)
-	private Long id;
-	
-	private String skill;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Column(name = "id", nullable = false, updatable = false)
+//	private Long id;
+//	
+//	private String skill;
 	//task remaining
 
 }
