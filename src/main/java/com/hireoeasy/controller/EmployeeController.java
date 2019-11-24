@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hireoeasy.domain.Employee;
+import com.hireoeasy.domain.UserDetail;
 import com.hireoeasy.service.EmployeeService;
 
 @RestController
@@ -60,6 +61,33 @@ public class EmployeeController {
 	public ResponseEntity<Employee> employeeLogin(@RequestBody Employee employee) {
 		Employee loggedInEmployee = employeeservice.employeeLogin(employee);
 		return ResponseEntity.ok().body(loggedInEmployee);
+	}
+	
+////	to save user detail
+//	@PostMapping(value="/webapi/employee/{empId}/userdetail/save")
+//	public ResponseEntity<?> saveUserDetail(@PathVariable("empId") Long empId,@RequestBody UserDetail userDetail) {
+//		Optional<Employee> emp1 = employeeservice.findById(empId);
+//		if(emp1.isPresent()) {
+//			Employee emp = emp1.get();
+//			emp.setUserDetail(userDetail);
+//			employeeservice.save(emp);
+//		} else {
+//			System.out.println("Employee not found");
+//		}
+//		return ResponseEntity.ok().body("User Detail saved");
+//	}
+	
+//	get user detail by employee id
+	@GetMapping(value="/webapi/employee/{empId}/userdetail")
+	public ResponseEntity<UserDetail> getUserDetailForEmployee(@PathVariable("empId") Long empId) {
+		Optional<Employee> emp1 = employeeservice.findById(empId);
+		if(emp1.isPresent()) {
+			Employee emp = emp1.get();
+			UserDetail userDetail = emp.getUserDetail();
+			return ResponseEntity.ok().body(userDetail);
+		} else {
+			return null;
+		}
 	}
 
 }

@@ -29,7 +29,7 @@ public class UserDetailController {
 	}
 
 	// save user detail
-	@PostMapping(value = "webapi/employee/details/add")
+	@PostMapping(value = "webapi/employee/details/add/{empId}")
 	public ResponseEntity<?> addUserDetail(@RequestBody UserDetail userDetail) {
 		userDetailService.save(userDetail);
 		return ResponseEntity.ok().body("Employer added Success.");
