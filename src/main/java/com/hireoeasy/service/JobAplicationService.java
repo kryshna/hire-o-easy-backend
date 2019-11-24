@@ -16,7 +16,7 @@ public class JobAplicationService {
 
 	public void applyForJob(Long employerId, Long jobId) throws SQLException {
 
-		String query = "INSERT INTO employee_job (employee_id,job-Id) VALUES (?,?)";
+		String query = "INSERT INTO employee_job (employee_id,job_Id) VALUES (?,?)";
 		try {
 			pstm = con.prepareStatement(query);
 		} catch (SQLException e1) {
@@ -36,6 +36,5 @@ public class JobAplicationService {
 			pstm.close();
 			con.close();
 		}
-
 	}
 }
