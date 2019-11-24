@@ -1,5 +1,6 @@
 package com.hireoeasy.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +21,7 @@ import com.hireoeasy.domain.UserDataInput;
 import com.hireoeasy.domain.UserDetail;
 import com.hireoeasy.domain.Job;
 import com.hireoeasy.service.EmployeeService;
+import com.hireoeasy.service.JobAplicationService;
 import com.hireoeasy.service.JobService;
 
 @RestController
@@ -28,7 +31,11 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeservice;
 
+	@Autowired
 	private JobService jobService;
+	
+	@Autowired
+	private JobAplicationService jobApplicationService;
 
 	// Get all employee list
 	@GetMapping(value = "/webapi/employee/all")
@@ -117,24 +124,32 @@ public class EmployeeController {
 		}
 	}
 
-	@PostMapping(value = "/webapi/employee/{employee_id}/job/{job_id}/apply")
+	@PutMapping(value = "/webapi/employee/{employee_id}/job/{job_id}/apply")
 	public ResponseEntity<?> applyJob(@PathVariable("employee_id") Long employeeId,
 			@PathVariable("job_id") Long jobId) {
 		Optional<Employee> employee = employeeservice.findById(employeeId);
 		Optional<Job> job = jobService.findByid(jobId);
 		ArrayList<Job> jobs = new ArrayList<>();
-		if (job.isPresent()) {
-			Job jobDto = job.get();
-			jobs.add(jobDto);
+//		if (job.isPresent()) {
+//			Job jobDto = job.get();
+//			jobs.add(jobDto);
+//		}
+//
+//		if (employee.isPresent()) {
+//			Employee emp1 = employee.get();
+//
+//			emp1.setJob(jobs);
+//			employeeservice.save(emp1);
+//		}
+
+		if (job.isPresent() && employee.isPresent() ) {
+			try {
+				jobApplicationService.applyForJob(employeeId, jobId);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
-		if (employee.isPresent()) {
-			Employee emp1 = employee.get();
-
-			emp1.setJob(jobs);
-			employeeservice.save(emp1);
-		}
-
 		return ResponseEntity.ok().body("job added ");
 	}
 
