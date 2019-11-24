@@ -124,15 +124,15 @@ public class EmployeeController {
 		return ResponseEntity.ok().body(jobs);
 	}
 
-	@GetMapping(value = "/webapi/employer/{employer_id}/job/{job_id}/applications")
-	public ResponseEntity<?> findEmployeeByJob(@PathVariable("employer_id") Long employeeId,
+	@GetMapping(value = "/webapi/employer/job/{job_id}/applications")
+	public ResponseEntity<?> findEmployeeByJob(
 			@PathVariable("jobId") Long jobId) {
 		Optional<Job> job = jobService.findByid(jobId);
-		Optional<Employer> employer = employerService.findById(employeeId);
+		//Optional<Employer> employer = employerService.findById(employeeId);
 
 		ArrayList<Employee> employeeList = new ArrayList<>();
 
-		if (employer.isPresent() && job.isPresent()) {
+		if (job.isPresent()) {
 			try {
 				employeeList = jobApplicationService.findEmployeeByJob(jobId);
 			} catch (SQLException e) {
